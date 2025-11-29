@@ -256,7 +256,7 @@ npm install -D wrangler@latest
 ```toml
 main = ".open-next/worker.js"
 name = "avantis-dashboard"
-compatibility_date = "2025-03-25"
+compatibility_date = "2024-06-06"
 compatibility_flags = ["nodejs_compat"]
 
 [assets]
