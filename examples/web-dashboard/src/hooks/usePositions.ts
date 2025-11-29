@@ -25,7 +25,9 @@ export function usePositions(walletAddress: string | null, privateKey: string | 
 
         try {
           currentPrice = await client.feedClient.getPrice(trade.pairIndex);
-        } catch {}
+        } catch (error) {
+          console.error(`Failed to fetch current price for pairIndex ${trade.pairIndex}:`, error);
+        }
 
         const priceDiff = trade.isLong
           ? currentPrice - trade.openPrice
