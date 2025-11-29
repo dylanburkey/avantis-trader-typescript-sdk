@@ -440,7 +440,8 @@ npm test -- --watch
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
+Author: Dylan Burkey
+X: @dylanburkey
 ---
 
 **Disclaimer**: This is an unofficial community SDK. Use at your own risk. Always test with small amounts first. The authors are not responsible for any financial losses incurred through the use of this software.
