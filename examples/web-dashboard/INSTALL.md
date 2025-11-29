@@ -223,11 +223,107 @@ src/
 
 ## Deployment
 
-### Vercel (Recommended)
+### Vercel
 
 ```bash
 npm install -g vercel
 vercel
+```
+
+### Cloudflare Workers (Recommended)
+
+Deploy your Next.js app to Cloudflare's edge network using the OpenNext adapter.
+
+#### Option 1: New Deployment with C3
+
+If starting fresh, use Cloudflare's create tool:
+
+```bash
+npm create cloudflare@latest -- avantis-dashboard --framework=next
+```
+
+#### Option 2: Deploy Existing Project
+
+1. **Install dependencies**
+
+```bash
+npm install @opennextjs/cloudflare@latest
+npm install -D wrangler@latest
+```
+
+2. **Create `wrangler.toml`** in project root:
+
+```toml
+main = ".open-next/worker.js"
+name = "avantis-dashboard"
+compatibility_date = "2025-03-25"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+```
+
+3. **Create `open-next.config.ts`** in project root:
+
+```ts
+import { defineCloudflareConfig } from "@opennextjs/cloudflare";
+
+export default defineCloudflareConfig();
+```
+
+4. **Update `package.json`** scripts:
+
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+  }
+}
+```
+
+5. **Preview locally** (uses Cloudflare's workerd runtime):
+
+```bash
+npm run preview
+```
+
+6. **Deploy to Cloudflare**:
+
+```bash
+npm run deploy
+```
+
+Your app will be available at `https://avantis-dashboard.<your-subdomain>.workers.dev`.
+
+#### Cloudflare Workers Features
+
+| Feature | Status |
+|---------|--------|
+| App Router | Supported |
+| Server-Side Rendering | Supported |
+| React Server Components | Supported |
+| API Routes | Supported |
+| Middleware | Supported |
+| Image Optimization | Supported (via Cloudflare Images) |
+
+#### Environment Variables on Cloudflare
+
+Set secrets using Wrangler:
+
+```bash
+wrangler secret put NEXT_PUBLIC_RPC_URL
+```
+
+Or add to `wrangler.toml`:
+
+```toml
+[vars]
+NEXT_PUBLIC_RPC_URL = "https://mainnet.base.org"
 ```
 
 ### Docker
