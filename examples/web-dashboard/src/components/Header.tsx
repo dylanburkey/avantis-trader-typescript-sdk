@@ -22,7 +22,10 @@ export function Header({ wallet, onConnect, onDisconnect }: HeaderProps) {
       setShowModal(false);
       setPrivateKey('');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to connect');
+      setError(
+        (err instanceof Error ? err.message : 'Failed to connect') +
+        '. Please ensure your private key is in the correct format: 0x followed by 64 hexadecimal characters.'
+      );
     }
   };
 
