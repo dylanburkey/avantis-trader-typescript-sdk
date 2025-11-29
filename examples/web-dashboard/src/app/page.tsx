@@ -20,7 +20,7 @@ export default function Home() {
   const stats = useMarketStats(pairs);
 
   const { data: selectedPairData, isLoading: pairLoading } = usePairData(
-    selectedPairIndex ?? 0
+    selectedPairIndex === null ? undefined : selectedPairIndex
   );
 
   const { data: positions, isLoading: positionsLoading } = usePositions(
