@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { formatUsd, formatPrice, formatPercent } from '@/lib/avantis';
+import { formatPrice, formatPercent } from '@/lib/avantis';
 import { Position } from '@/types';
 import { useClosePosition, useUpdateTpSl } from '@/hooks/usePositions';
 
